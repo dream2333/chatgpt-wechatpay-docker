@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./gpt-backend
+    # ports:
+    #   - 8000:8000
+    depends_on:
+      - db
+    networks:
+      - app-network
+    volumes:
+      - ./gpt-backend/secerts.toml:/app/secerts.toml
+  db:
+    image: postgres:13.3-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: chatgpt
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+    networks:
+      - app-network
+    ports:
+      - 5431:5432
+  caddy:
+    image: caddy:2.7.3-alpine
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./gpt-frontend/dist:/var/www
+      - ./caddy/access.log:/var/log/caddy/access.log
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - backend
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:

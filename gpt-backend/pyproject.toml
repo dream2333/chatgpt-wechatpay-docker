@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "website"
+version = "0.1.0"
+description = ""
+authors = ["dream2333 <vincentqng@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = "^0.22.0"
+orjson = "^3.9.1"
+aiohttp = { extras = ["speedups"], version = "^3.8.4" }
+fastapi = "^0.99.1"
+python-jose = { extras = ["cryptography"], version = "^3.3.0" }
+psycopg2 = "^2.9.6"
+tortoise-orm = { extras = ["accel", "asyncpg"], version = "^0.19.3" }
+aerich = "^0.7.1"
+wechatpayv3 = "^1.2.39"
+
+
+[tool.aerich]
+tortoise_orm = "settings.TORTOISE_ORM"
+location = "./migrations"
+src_folder = "./."
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

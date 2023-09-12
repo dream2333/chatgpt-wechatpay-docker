@@ -1,0 +1,22 @@
+# 这是一个配置文件，用于配置一些敏感信息，使用时请将文件名改为secret.toml
+# 以下为实例内容，请不要使用下方的key、secret配置，使用你自己生成的内容
+[wechat]
+appid = "your_wechat_appid"
+app_secret = "your_wechat_app_secret"
+
+
+[wechat_pay]
+mchid = "your_wechat_pay_mchid"
+cert_key = 'your_wechat_pay_cert_key.pem'
+serial_no = 'your_wechat_pay_serial_no'
+apiv3_key = 'your_wechat_pay_apiv3_key'
+appid = 'your_wechat_pay_appid'
+notify_url = 'your_wechat_pay_notify_url'
+
+[openai]
+key = ["your_openai_key_1", "your_openai_key_2"]
+
+[server]
+# jwt secret生成密钥
+key = "eedf356cecc2a6ea31609fdf8c9f095ca1d21b3a0eef2ee617a752591ebebe36"
+db = "postgres://postgres:123456@127.0.0.1:5432/chatgpt"

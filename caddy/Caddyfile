@@ -1,0 +1,19 @@
+127.0.0.1:80, www.hym88888.com:80 {
+    root * /var/www
+
+    route /api/* {
+        reverse_proxy /api/* backend:8000 # 后端api服务地址
+    }
+
+    route {
+        try_files {path} /index.html
+        file_server
+    }
+    log {
+        output file "/var/log/caddy/access.log"{
+            roll_uncompressed
+            roll_keep 10
+            roll_keep_for 720h
+        }
+    }
+}
